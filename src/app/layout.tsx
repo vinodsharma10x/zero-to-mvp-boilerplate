@@ -6,7 +6,7 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Next.js Boilerplate',
+  title: '# Zero to MVP Boilerplate (using Next.js)',
   description: 'A starting point for your Next.js project',
 }
 

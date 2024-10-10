@@ -8,7 +8,7 @@ type LayoutProps = {
   title?: string
 }
 
-const Layout = ({ children, title = 'Next.js Boilerplate' }: LayoutProps) => {
+const Layout = ({ children, title = 'Zero to MVP Boilerplate' }: LayoutProps) => {
   const { theme, toggleTheme } = useAppContext();
 
   return (
@@ -29,7 +29,7 @@ const Layout = ({ children, title = 'Next.js Boilerplate' }: LayoutProps) => {
       </main>
       <footer className="bg-gray-200 p-4">
         <div className="container mx-auto text-center">
-          © 2023 Next.js Boilerplate
+          © 2024 Vinod Sharma
         </div>
       </footer>
     </div>

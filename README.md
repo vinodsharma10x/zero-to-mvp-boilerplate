@@ -1,4 +1,4 @@
-# NextJS Zero to MVP Boilerplate
+# Zero to MVP Boilerplate (using Next.js)
 
 This is a Next.js boilerplate project designed to take founders from zero to MVP rapidly. It's an essential part of the "Zero to MVP in 90 Days" guide and ecosystem.
 

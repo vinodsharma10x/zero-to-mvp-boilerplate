@@ -1,56 +1,61 @@
 'use client';
 
-import { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { useAuth } from '@/context/AuthContext';
+import Input from './common/Input';
 
-export default function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { login, isLoggedIn, logout } = useAuth();
+// Define the validation schema
+const schema = yup.object().shape({
+  email: yup.string().email('Invalid email').required('Email is required'),
+  password: yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
+});
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+type FormData = {
+  email: string;
+  password: string;
+};
+
+const LoginForm: React.FC = () => {
+  const { login } = useAuth();
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = async (data: FormData) => {
     try {
-      await login(email, password);
+      await login(data.email, data.password);
     } catch (error) {
       console.error('Login failed:', error);
     }
   };
 
-  if (isLoggedIn) {
-    return (
-      <div>
-        <p>You are logged in!</p>
-        <button onClick={logout} className="btn-primary mt-4">Logout</button>
-      </div>
-    );
-  }
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label htmlFor="email" className="block mb-2">Email:</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="w-full p-2 border rounded"
-        />
-      </div>
-      <div>
-        <label htmlFor="password" className="block mb-2">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="w-full p-2 border rounded"
-        />
-      </div>
-      <button type="submit" className="btn-primary">Login</button>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <Input
+        label="Email"
+        name="email"
+        type="email"
+        register={register}
+        error={errors.email}
+      />
+      <Input
+        label="Password"
+        name="password"
+        type="password"
+        register={register}
+        error={errors.password}
+      />
+      <button
+        type="submit"
+        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      >
+        Sign In
+      </button>
     </form>
   );
-}
+};
+
+export default LoginForm;

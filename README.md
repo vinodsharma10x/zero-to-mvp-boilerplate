@@ -51,3 +51,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - Zero to MVP Guide: [Link to your guide]
 - SaaS Founders Hub: [Link to your hub]
 - Founders Innovation Hub: [Link to your hub]
+
+![Continuous Integration](https://github.com/vinodsharma10x/zero-to-mvp-boilerplate/workflows/Continuous%20Integration/badge.svg)
